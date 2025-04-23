@@ -27,6 +27,7 @@ sap.ui.define([
                 this.setModel(models.createDeviceModel(), "device");
                 let oModel = this.getModel();
 
+                const token = localStorage.getItem("access_token");
 if (token && oModel && oModel.setHeaders) {
   oModel.setHeaders({
     "Authorization": "Bearer " + token

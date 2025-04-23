@@ -31,19 +31,84 @@
 
         <script>
             debugger
-            fetch("https://4004-jantristanh-harzerwande-t1hbe8nf4g6.ws-eu118.gitpod.io/odata/v2/api/$metadata", {
-            credentials: "include"
-            }).then(response => {
-                debugger
-            if (response.ok) {
-                console.log("✅ User is logged in.");
-            } else if (response.status === 401) {
-                console.log("🔒 User is not logged in.");
-                window.location.href = "https://4004-jantristanh-harzerwande-t1hbe8nf4g6.ws-eu118.gitpod.io/login";
+            async function loginWithAuth0() {
+            const { verifier, challenge } = await generateCodeChallenge();
+            localStorage.setItem("pkce_verifier", verifier); // save for token exchange
+
+            const authUrl =
+                "https://dev-ijucl08spdudaszc.us.auth0.com/authorize?" +
+                `client_id=QjPtSX1p1CdBySek27GRDrOJ4pKba6iY` +
+                `&response_type=code` +
+                `&redirect_uri=https://preview-67f-67f7c4efe78885e73aaa223e-67f9284ce788857c47aa223c.monaca.mobi://callback` +
+                `&scope=openid profile email` +
+                `&code_challenge=${challenge}` +
+                `&code_challenge_method=S256`;
+
+            if (window.cordova && cordova.plugins && cordova.plugins.browsertab) {
+                cordova.plugins.browsertab.openUrl(authUrl);
             } else {
-                console.log("⚠️ Unexpected response: ", response.status);
+                window.open(authUrl, "_system");
             }
-            });
+            }
+
+
+                function extractAccessTokenFromUrl(url) {
+                // Parse access token from hash fragment (implicit flow)
+                const match = url.match(/[#&]access_token=([^&]*)/);
+                return match && match[1];
+                }
+
+                window.handleOpenURL = function (url) {
+  setTimeout(() => {
+    if (url.startsWith("https://preview-67f-67f7c4efe78885e73aaa223e-67f9284ce788857c47aa223c.monaca.mobi://callback")) {
+      const code = new URL(url).searchParams.get("code");
+      if (code) {
+        exchangeCodeForToken(code);
+      } else {
+        console.error("No code in redirect");
+      }
+    }
+  }, 0);
+};
+
+function exchangeCodeForToken(code) {
+  const verifier = localStorage.getItem("pkce_verifier");
+
+  fetch("https://dev-ijucl08spdudaszc.us.auth0.com/oauth/token", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      grant_type: "authorization_code",
+      client_id: "QjPtSX1p1CdBySek27GRDrOJ4pKba6iY",
+      code_verifier: verifier,
+      code: code,
+      redirect_uri: "https://preview-67f-67f7c4efe78885e73aaa223e-67f9284ce788857c47aa223c.monaca.mobi://callback"
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.access_token) {
+      console.log("✅ Logged in!", data);
+      localStorage.setItem("access_token", data.access_token);
+      // Now launch UI5 app or fetch data
+    } else {
+      console.error("🚫 Token exchange failed", data);
+    }
+  });
+}
+
+document.addEventListener("deviceready", function () {
+  const token = localStorage.getItem("access_token");
+
+  if (!token) {
+    loginWithAuth0();
+  } else {
+    console.log("✅ Token already present, continue app flow");
+  }
+});
+
 
         </script>
         

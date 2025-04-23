@@ -6,7 +6,10 @@
     "node": ">=18.16"
   },
   "dependencies": {
-    "monaca-plugin-monaca-core": "3.3.1"
+    "monaca-plugin-monaca-core": "3.3.1",
+    "cordova-plugin-customurlscheme": "^5.0.2",
+    "cordova-plugin-browsertab": "^0.2.0",
+    "cordova-plugin-inappbrowser": "^6.0.0"
   },
   "scripts": {
     "monaca:preview": "npm run dev",
@@ -14,7 +17,10 @@
   },
   "cordova": {
     "plugins": {
-      "monaca-plugin-monaca-core": {}
+      "monaca-plugin-monaca-core": {},
+      "cordova-plugin-customurlscheme": {},
+      "cordova-plugin-browsertab": {},
+      "cordova-plugin-inappbrowser": {}
     }
   },
   "devDependencies": {

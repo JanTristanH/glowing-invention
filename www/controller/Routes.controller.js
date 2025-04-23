@@ -1,0 +1,2 @@
+sap.ui.define(["hwb/frontendhwb/controller/BaseController"],function(e){"use strict";return e.extend("hwb.frontendhwb.controller.Routes",{onAfterRendering:function(){this.getView().byId("navButtonRoutesId").setType("Emphasized")}})});
+//# sourceMappingURL=Routes.controller.js.map

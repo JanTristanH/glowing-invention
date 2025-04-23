@@ -1,0 +1,51 @@
+<c:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+>
+    <Dialog
+        title="Spot Aktionen"
+        class="sapUiResponsiveContentPadding"
+        resizable="true"
+    >
+
+        <VBox>
+            <Label text="Current Id ()" class="sapUiSmallMarginBottom" id="idCurrentIdLabel"/>
+            <Label text="Name" labelFor="idNameInput"/>
+            <Input id="idNameInput" class="sapUiSmallMarginBottom"/>
+
+            <Label text="Beschreibung" labelFor="idDescriptionInput"/>
+            <Input id="idDescriptionInput" class="sapUiSmallMarginBottom"/>
+            <Button
+                press=".onOpenExternalButtonPress"
+                text="Auf HWN Seite suche"
+                icon="sap-icon://search"
+                class="sapUiSmallMarginBottom"
+            />
+            <Button
+                press=".onShowRoutesButtonPress"
+                text="Routen Anzeigen"
+                icon="sap-icon://show"
+                class="sapUiSmallMarginBottom"
+            />
+            <Button
+                press=".onRecalculateRoutesPress"
+                text="Routen neu berechnen"
+                icon="sap-icon://collections-management"
+                enabled="false"
+                class="sapUiSmallMarginBottom"
+            />
+            <Button
+                press=".onDeleteButtonPress"
+                text="Löschen"
+                icon="sap-icon://delete"
+                class="sapUiSmallMarginBottom"
+            />
+        </VBox>
+        <beginButton>
+            <Button text="Speichern" press="onSaveButtonSpotActionPress" type="Emphasized" />
+        </beginButton>
+        <endButton>
+            <Button text="Schließen" press="onCloselButtonSpotActionPress" />
+        </endButton>
+    </Dialog>
+</c:FragmentDefinition>

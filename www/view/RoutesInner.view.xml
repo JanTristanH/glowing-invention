@@ -1,0 +1,233 @@
+<mvc:View
+    controllerName="hwb.frontendhwb.controller.RoutesInner"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:card="sap.f.cards"
+    height="100%"
+    width="100%"
+>
+    <f:FlexibleColumnLayout id="fcl">
+        <f:beginColumnPages>
+            <Page
+                id="page"
+                enableScrolling="true"
+                title="{i18n>title}"
+                backgroundDesign="Transparent"
+            >
+                <headerContent>
+                    <core:Fragment
+                        fragmentName="hwb.frontendhwb.fragment.currentUserAvatar"
+                        type="XML"
+                    />
+                </headerContent>
+                <content>
+                    <HBox
+                        height="100%"
+                        width="100%"
+                    >
+                        <IconTabBar
+                            id="idIconTabBarMulti"
+                            class="sapUiResponsiveContentPadding"
+                            expandable="false"
+                        >
+                            <items>
+                                <IconTabFilter
+                                    icon="sap-icon://expand-all"
+                                    key="iconTabFilterTours"
+                                    text="{i18n>allTours}"
+                                >
+                                    <Toolbar>
+                                        <Button
+                                            icon="sap-icon://add"
+                                            press="onButtonCreateTourPress"
+                                        />
+                                    </Toolbar>
+                                    <List
+                                        id="idTourList"
+                                        items="{
+                                            path: '/Tours',
+                                            sorter: {
+                                                path: 'createdAt',
+                                                descending: true
+                                            }
+                                        }"
+                                        selectionChange="onToursListSelectionChange"
+                                        mode="SingleSelectMaster"
+                                    >
+                                        <CustomListItem>
+                                            <VBox
+                                                class="sapUiResponsiveMargin sapUiMediumMarginEnd"
+                                                width="95%"
+                                            >
+                                                <f:Card
+                                                    class="sapUiTinyMargin"
+                                                    width="100%"
+                                                >
+                                                    <f:header>
+                                                        <card:Header
+                                                            title="{name}"
+                                                        />
+                                                    </f:header>
+                                                    <f:content>
+                                                        <VBox width="100%">
+                                                            <HBox
+                                                                justifyContent="SpaceAround"
+                                                                alignItems="Center"
+                                                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                                                width="24rem"
+                                                            >
+                                                            <!-- 
+                                                                <Image
+                                                                    src="images/placeholder/MapPlaceholder.png"
+                                                                    mode="Background"
+                                                                    height="10rem"
+                                                                    width="10rem"
+                                                                />
+                                                                <Image
+                                                                    src="images/placeholder/LocationPlaceholder.jpg"
+                                                                    mode="Background"
+                                                                    backgroundPosition="center"
+                                                                    height="10rem"
+                                                                    width="10rem"
+                                                                />
+                                                            -->
+                                                            </HBox>
+                                                            <!-- hard facts bar below -->
+                                                            <FlexBox
+                                                                justifyContent="SpaceAround"
+                                                                alignItems="Center"
+                                                                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+                                                                width="95%"
+                                                            >
+                                                                <VBox
+                                                                    alignContent="Center"
+                                                                    alignItems="Center"
+                                                                    class="sapUiMediumMarginBegin"
+                                                                >
+                                                                    <core:Icon
+                                                                        src="sap-icon://fob-watch"
+                                                                    />
+                                                                    <Text
+                                                                        text="{path: 'duration', formatter: '.formatSecondsToTime'}"
+                                                                    />
+                                                                </VBox>
+                                                                <Text
+                                                                    text="|"
+                                                                />
+                                                                <VBox
+                                                                    alignContent="Center"
+                                                                    alignItems="Center"
+                                                                >
+                                                                    <core:Icon
+                                                                        src="sap-icon://direction-arrows"
+                                                                    />
+                                                                    <Text
+                                                                        text="{path: 'distance', formatter: '.formatMetersToKilometers'}"
+                                                                    />
+                                                                </VBox>
+                                                                <Text
+                                                                    text="|"
+                                                                />
+                                                                <VBox
+                                                                    alignContent="Center"
+                                                                    alignItems="Center"
+                                                                >
+                                                                    <core:Icon
+                                                                        src="sap-icon://toaster-top"
+                                                                    />
+                                                                    <Text
+                                                                        text="{AverageGroupStampings} / {stampCount}"
+                                                                    />
+                                                                </VBox>
+                                                                <Text
+                                                                    text="|"
+                                                                />
+                                                                <VBox
+                                                                    alignContent="Center"
+                                                                    alignItems="Center"
+                                                                    class="sapUiMediumMarginEnd"
+                                                                >
+                                                                    <core:Icon
+                                                                        src="sap-icon://trend-up"
+                                                                    />
+                                                                    <Text
+                                                                        text="{path: 'totalElevationGain', formatter: '.formatCleanMeter'}"
+                                                                    />
+                                                                </VBox>
+                                                            </FlexBox>
+                                                        </VBox>
+                                                    </f:content>
+                                                </f:Card>
+                                            </VBox>
+                                            <customData>
+                                                <core:CustomData
+                                                    key="ID"
+                                                    value="{ID}"
+                                                    writeToDom="true"
+                                                />
+                                            </customData>
+                                        </CustomListItem>
+                                    </List>
+                                </IconTabFilter>
+                                <IconTabFilter
+                                    icon="sap-icon://ai"
+                                    key="iconTabFilterCalculatedRoutes"
+                                    text="{i18n>individuel}"
+                                >
+                                    <HBox>
+                                        <!-- alternate calculation button when IllustratedMessage is hidden -->
+                                        <Button
+                                            id="idTourCalculateButton"
+                                            visible="false"
+                                            text="{i18n>calculateTour}"
+                                            press='onOpenRoutingDialog'
+                                            class="sapUiSmallMargin"
+                                            icon="sap-icon://activate"
+                                        />
+                                    </HBox>
+                                    <HBox width="100rem">
+                                        <IllustratedMessage
+                                            enableVerticalResponsiveness="true"
+                                            illustrationType="sapIllus-SearchEarth"
+                                            title="{i18n>noIndividuellDataHeader}"
+                                            description="{i18n>noIndividuellData}"
+                                            visible="{= ${local>/hikingRoutes}.length === 0 }"
+                                        >
+                                            <additionalContent>
+                                                <Button
+                                                    text="{i18n>calculateTour}"
+                                                    press='onOpenRoutingDialog'
+                                                    class="sapUiSmallMargin"
+                                                    icon="sap-icon://activate"
+                                                />
+                                            </additionalContent>
+                                        </IllustratedMessage>
+                                    </HBox>
+                                    <Title 
+                                        level="H3" 
+                                        text="{i18n>generatedToursTitle}"
+                                        visible="{= !!${local>/hikingRoutes/0} }"
+                                    />
+                                    <SelectList
+                                        id="idRouteList"
+                                        items="{local>/hikingRoutes}"
+                                        selectionChange="onSelectionChange"
+                                        width="100%"
+                                    >
+                                        <core:ListItem
+                                            key="{local>id}"
+                                            text="Länge: {path: 'local>duration', formatter: '.formatSecondsToTime'} - Distanz: {path: 'local>distance', formatter: '.formatMetersToKilometers'} - Stempel: {local>stampCount}"
+                                        />
+                                    </SelectList>
+                                </IconTabFilter>
+                            </items>
+                        </IconTabBar>
+                    </HBox>
+                </content>
+            </Page>
+        </f:beginColumnPages>
+    </f:FlexibleColumnLayout>
+</mvc:View>

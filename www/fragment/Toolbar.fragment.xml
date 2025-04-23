@@ -1,0 +1,41 @@
+<Toolbar
+    xmlns="sap.m"
+    height="3.5rem"
+>
+    <ToolbarSpacer />
+    <Button
+        id="navButtonListId"
+        text="{i18n>StampList}"
+        icon="sap-icon://activity-2"
+        press="onNavToList"
+    />
+    <ToolbarSpacer />
+    <Button
+        id="navButtonMapId"
+        text="{i18n>Map}"
+        icon="sap-icon://map-3"
+        press="onNavToMap"
+    />
+    <ToolbarSpacer />
+    <Button
+        id="navButtonRoutesId"
+        text="{i18n>PlanRoute}"
+        icon="sap-icon://paper-plane"
+        press="onNavToRouting"
+    />
+    <ToolbarSpacer />
+    <Button
+        id="navButtonFriendsId"
+        text="{i18n>friends}"
+        icon="sap-icon://group"
+        press="onNavToFriends"
+    />
+    <Button
+        id="idRoutePlanenAdminButton"
+        text="{i18n>AdminMap}"
+        icon="sap-icon://key-user-settings"
+        press="onButtonAdminMapPress"
+        visible="false"
+    />
+    <ToolbarSpacer />
+</Toolbar>

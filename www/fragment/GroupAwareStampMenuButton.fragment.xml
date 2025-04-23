@@ -1,0 +1,18 @@
+<core:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <Button 
+        text="{i18n>stampForMe}" 
+        icon="{path: 'local>/bStampingEnabled', formatter: '.formatStampButtonIcon'}" 
+        visible="{local>/bStampingVisible}"
+        enabled="{local>/bStampingEnabled}"
+        press="onButtonStampPress"
+        type="Default"
+    />
+    <Button 
+        text="{i18n>stampForGroup}"
+        icon="sap-icon://checklist"
+        press=".onStampGroupPress"
+        type="Transparent" />
+</core:FragmentDefinition>

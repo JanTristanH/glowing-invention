@@ -1,0 +1,648 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:ux="sap.uxap"
+    xmlns:core="sap.ui.core"
+    xmlns:custom="hwb.frontendhwb.control"
+
+>
+    <Dialog
+        title="{i18n>badges}"
+        class="sapUiResponsiveContentPadding"
+        horizontalScrolling="false"
+    >
+        <IconTabBar
+            expandable="false"
+            class="sapUiResponsiveContentPadding"
+        >
+            <items>
+                <IconTabFilter
+                    text="{i18n>general}"
+                    key="general"
+                >
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop sapUiMediumMarginBottom"
+                    >
+                        <Title text="{i18n>titleBronze}" />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/badges/01-bronze.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                            />
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iSelectedCount} >= 8 }"
+                            />
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '8'}], formatter: '.min'} / 8" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '8'}], formatter: '.min'}"
+                                            total="8"
+                                            color="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '8'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+                        <Text
+                            text="{i18n>bronzeRequirementText}"
+                            class="sapUiTinyMargin"
+                        />
+                    </VBox>
+
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiMediumMarginTopBottom"
+                    >
+                        <Title text="{i18n>titleSilver}" />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/badges/02-silver.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                            />
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iSelectedCount} >= 16 }"
+                            />
+
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '16'}], formatter: '.min'} / 16" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '16'}], formatter: '.min'}"
+                                            total="16"
+                                            color="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '16'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+                        <Text
+                            text="{i18n>silverRequirementText}"
+                            class="sapUiTinyMargin"
+                        />
+                    </VBox>
+
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiMediumMarginTopBottom"
+                    >
+                        <Title text="{i18n>titleGold}" />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/badges/03-gold.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                            />
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iSelectedCount} >= 24 }"
+                            />
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '24'}], formatter: '.min'} / 24" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '24'}], formatter: '.min'}"
+                                            total="24"
+                                            color="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '24'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+                        <Text
+                            text="{i18n>goldRequirementText}"
+                            class="sapUiTinyMargin"
+                        />
+                    </VBox>
+
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiMediumMarginTopBottom"
+                    >
+                        <Title text="{i18n>titleKing}" />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/badges/04-king.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                            />
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iSelectedCount} >= 50 }"
+                            />
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '50'}], formatter: '.min'} / 50" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '50'}], formatter: '.min'}"
+                                            total="50"
+                                            color="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '50'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+                        <Text
+                            text="{i18n>kingRequirementText}"
+                            class="sapUiTinyMargin"
+                        />
+                    </VBox>
+
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiMediumMarginTopBottom"
+                    >
+                        <Title text="{i18n>titleRiser}" />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/badges/05-riser.png"
+                                mode="Background"
+                                height="5rem"
+                                width="10rem"
+                            />
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iRiserProgressCount} >= 111 }"
+                            />
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iRiserProgressCount'}, {value: '111'}], formatter: '.min'} / 111" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iRiserProgressCount'}, {value: '111'}], formatter: '.min'}"
+                                            total="111"
+                                            color="{parts: [{path: 'localDialog>/iRiserProgressCount'}, {value: '111'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+                        <Text
+                            text="{i18n>riserRequirementText}"
+                            class="sapUiTinyMargin"
+                        />
+                        <Panel
+                            expandable="true"
+                            headerText="{i18n>miningStamps}"
+                            width="auto"
+                            class="sapUiTinyMargin"
+                        >
+                            <content>
+                                <List
+                                    mode="SingleSelectMaster"
+                                    items="{localDialog>/aRequiredStampsRiser}"
+                                >
+                                    <CustomListItem>
+                                        <HBox
+                                            justifyContent="SpaceBetween"
+                                            alignItems="Center"
+                                            width="100%"
+                                        >
+                                            <HBox>
+                                                <CheckBox
+                                                    editable="false"
+                                                    selected="{localDialog>visited}"
+                                                />
+                                                <Text
+                                                    text="{localDialog>name}"
+                                                    class="sapUiTinyMargin"
+                                                />
+                                            </HBox>
+                                            <Button
+                                                icon="sap-icon://navigation-right-arrow"
+                                                type="Transparent"
+                                                press="onStampNavigatePress"
+                                            >
+                                                <customData>
+                                                    <core:CustomData
+                                                        key="ID"
+                                                        value="{localDialog>ID}"
+                                                        writeToDom="true"
+                                                    />
+                                                </customData>
+                                            </Button>
+                                        </HBox>
+                                    </CustomListItem>
+                                </List>
+                            </content>
+                        </Panel>
+                    </VBox>
+
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiMediumMarginTopBottom"
+                    >
+                        <Title text="{i18n>titleBackpack}" />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/badges/06-backpack.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                            />
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iSelectedCount} >= 100 }"
+                            />
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '100'}], formatter: '.min'} / 100" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '100'}], formatter: '.min'}"
+                                            total="100"
+                                            color="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '100'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+                        <Text
+                            text="{i18n>backpackRequirementText}"
+                            class="sapUiTinyMargin"
+                        />
+                    </VBox>
+
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiMediumMarginTopBottom"
+                    >
+                        <Title text="{i18n>titleShoe}" />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/badges/07-shoe.png"
+                                mode="Background"
+                                height="10rem"
+                                width="5rem"
+                            />
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iSelectedCount} >= 150 }"
+                            />
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '150'}], formatter: '.min'} / 150" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '150'}], formatter: '.min'}"
+                                            total="150"
+                                            color="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '150'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+                        <Text
+                            text="{i18n>shoeRequirementText}"
+                            class="sapUiTinyMargin"
+                        />
+                    </VBox>
+
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiMediumMarginTopBottom"
+                    >
+                        <Title text="{i18n>titleEmperor}" />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/badges/08-emperor.png"
+                                mode="Background"
+                                height="5rem"
+                                width="10rem"
+                            />
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iSelectedCount} >= 222 }"
+                            />
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '222'}], formatter: '.min'} / 222" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '222'}], formatter: '.min'}"
+                                            total="222"
+                                            color="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '222'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+                        <Text
+                            text="{i18n>emperorRequirementText}"
+                            class="sapUiTinyMargin"
+                        />
+                    </VBox>
+                </IconTabFilter>
+                <IconTabFilter
+                    text="{i18n>theme}"
+                    key="theme"
+                >
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop sapUiMediumMarginBottom"
+                    >
+                        <Title text="{i18n>titleBoarder}" />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/badges/S1-boarder.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                            />
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iBoarderProgressCount} >= 22 }"
+                            />
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iBoarderProgressCount'}, {value: '22'}], formatter: '.min'} / 22" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iBoarderProgressCount'}, {value: '22'}], formatter: '.min'}"
+                                            total="22"
+                                            color="{parts: [{path: 'localDialog>/iBoarderProgressCount'}, {value: '22'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+                        <Text
+                            text="{i18n>boarderRequirementText}"
+                            class="sapUiTinyMarginBeginEnd sapUiTinyMarginBottom"
+                        />
+                        <Panel
+                            expandable="true"
+                            headerText="{i18n>boarderStamps}"
+                            width="auto"
+                            class="sapUiTinyMargin"
+                        >
+                            <content>
+                                <MessageStrip
+                                    text="{i18n>warningMsgMissingSpecialStamps}"
+                                    type="Warning"
+                                    class="sapUiTinyMarginBottom"
+                                >
+                                    <link />
+                                </MessageStrip>
+                                <List
+                                    mode="SingleSelectMaster"
+                                    items="{localDialog>/aRequiredStampsBoarder}"
+                                >
+                                    <CustomListItem>
+                                        <HBox
+                                            justifyContent="SpaceBetween"
+                                            alignItems="Center"
+                                            width="100%"
+                                        >
+                                            <HBox>
+                                                <CheckBox
+                                                    editable="false"
+                                                    selected="{localDialog>visited}"
+                                                />
+                                                <Text
+                                                    text="{localDialog>name}"
+                                                    class="sapUiTinyMargin"
+                                                />
+                                            </HBox>
+                                            <Button
+                                                icon="sap-icon://navigation-right-arrow"
+                                                type="Transparent"
+                                                press="onStampNavigatePress"
+                                            >
+                                                <customData>
+                                                    <core:CustomData
+                                                        key="ID"
+                                                        value="{localDialog>ID}"
+                                                        writeToDom="true"
+                                                    />
+                                                </customData>
+                                            </Button>
+                                        </HBox>
+                                    </CustomListItem>
+                                </List>
+                            </content>
+                        </Panel>
+                    </VBox>
+
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop sapUiMediumMarginBottom"
+                    >
+                        <Title text="{i18n>titleGoethe}" />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/badges/S2-goethe.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                            />
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iGoetheProgressCount} >= 28 }"
+                            />
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iGoetheProgressCount'}, {value: '28'}], formatter: '.min'} / 28" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iGoetheProgressCount'}, {value: '28'}], formatter: '.min'}"
+                                            total="28"
+                                            color="{parts: [{path: 'localDialog>/iGoetheProgressCount'}, {value: '28'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+                        <Text
+                            text="{i18n>goetheRequirementText}"
+                            class="sapUiTinyMarginBeginEnd sapUiTinyMarginBottom"
+                        />
+                        <Panel
+                            expandable="true"
+                            headerText="{i18n>goethteStamps}"
+                            width="auto"
+                            class="sapUiTinyMargin"
+                        >
+                            <content>
+                                <List
+                                    mode="SingleSelectMaster"
+                                    items="{localDialog>/aRequiredStampsGoethe}"
+                                >
+                                    <CustomListItem>
+                                        <HBox
+                                            justifyContent="SpaceBetween"
+                                            alignItems="Center"
+                                            width="100%"
+                                        >
+                                            <HBox>
+                                                <CheckBox
+                                                    editable="false"
+                                                    selected="{localDialog>visited}"
+                                                />
+                                                <Text
+                                                    text="{localDialog>name}"
+                                                    class="sapUiTinyMargin"
+                                                />
+                                            </HBox>
+                                            <Button
+                                                icon="sap-icon://navigation-right-arrow"
+                                                type="Transparent"
+                                                press="onStampNavigatePress"
+                                            >
+                                                <customData>
+                                                    <core:CustomData
+                                                        key="ID"
+                                                        value="{localDialog>ID}"
+                                                        writeToDom="true"
+                                                    />
+                                                </customData>
+                                            </Button>
+                                        </HBox>
+                                    </CustomListItem>
+                                </List>
+                            </content>
+                        </Panel>
+                    </VBox>
+
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop sapUiMediumMarginBottom"
+                    >
+                        <Title text="{i18n>titleWitchTrail}" />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/badges/S3-witchTrail.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                            />
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iWitchProgressCount} >= 11 }"
+                            />
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iWitchProgressCount'}, {value: '11'}], formatter: '.min'} / 11" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iWitchProgressCount'}, {value: '11'}], formatter: '.min'}"
+                                            total="11"
+                                            color="{parts: [{path: 'localDialog>/iWitchProgressCount'}, {value: '11'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+
+                        <Text
+                            text="{i18n>withTrailRequirementText}"
+                            class="sapUiTinyMarginBeginEnd sapUiTinyMarginBottom"
+                        />
+                        <Panel
+                            expandable="true"
+                            headerText="{i18n>witchTrailStamps}"
+                            width="auto"
+                            class="sapUiTinyMargin"
+                        >
+                            <content>
+                                <List
+                                    mode="SingleSelectMaster"
+                                    items="{localDialog>/aRequiredStampsWitchTrail}"
+                                >
+                                    <CustomListItem>
+                                        <HBox
+                                            justifyContent="SpaceBetween"
+                                            alignItems="Center"
+                                            width="100%"
+                                        >
+                                            <HBox>
+                                                <CheckBox
+                                                    editable="false"
+                                                    selected="{localDialog>visited}"
+                                                />
+                                                <Text
+                                                    text="{localDialog>name}"
+                                                    class="sapUiTinyMargin"
+                                                />
+                                            </HBox>
+                                            <Button
+                                                icon="sap-icon://navigation-right-arrow"
+                                                type="Transparent"
+                                                press="onStampNavigatePress"
+                                            >
+                                                <customData>
+                                                    <core:CustomData
+                                                        key="ID"
+                                                        value="{localDialog>ID}"
+                                                        writeToDom="true"
+                                                    />
+                                                </customData>
+                                            </Button>
+                                        </HBox>
+                                    </CustomListItem>
+                                </List>
+                            </content>
+                        </Panel>
+                    </VBox>
+                </IconTabFilter>
+                <IconTabFilter
+                    text="{i18n>children}"
+                    key="children"
+                >
+                    <VBox
+                        class="sapUiSmallMarginBeginEnd sapUiSmallMarginTop sapUiMediumMarginBottom"
+                    >
+                        <Title text="{i18n>titlePrince}" />
+                        <Image
+                            src="images/badges/99-prince.png"
+                            mode="Background"
+                            height="5rem"
+                            width="25rem"
+                        />
+                        <FlexBox justifyContent="SpaceBetween">
+                            <Image
+                                src="images/buddyCelebrating2_noBg.png"
+                                mode="Background"
+                                height="5rem"
+                                width="5rem"
+                                visible="{= ${localDialog>/iSelectedCount} >= 11 }"
+                            />
+                            <VBox
+                                alignItems="Center"
+                            >
+                                <Text text="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '11'}], formatter: '.min'} / 11" />
+                                <custom:DonutMicroChart
+                                            value="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '11'}], formatter: '.min'}"
+                                            total="11"
+                                            color="{parts: [{path: 'localDialog>/iSelectedCount'}, {value: '11'}], formatter: '.calculateValueColor'}"
+                                />
+                            </VBox>
+                        </FlexBox>
+                        <Text
+                            text="{i18n>princeRequirementText}"
+                            class="sapUiTinyMargin"
+                        />
+                    </VBox>
+                </IconTabFilter>
+            </items>
+        </IconTabBar>
+        <endButton>
+            <Button
+                text="{i18n>close}"
+                press="onCloseButtonPress"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

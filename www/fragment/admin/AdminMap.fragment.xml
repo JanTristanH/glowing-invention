@@ -1,0 +1,23 @@
+<vbm:GeoMap id="mapAdmin" mapConfiguration="{mapConfig>/}" initialPosition="10.615779999999972;51.80054" initialZoom="14"
+    height="100%" width="100%"
+	xmlns:vbm="sap.ui.vbm"
+    xmlns:customData="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    contextMenu="onGeoMapContextMenu" zoomChanged="onGeoMapZoomChanged">
+    <!-- map config from https://embed.plnkr.co/plunk/k5ql5sUBbmmfJ0yU -->
+    <vbm:vos>
+        <vbm:Routes items="{local>/oSelectedTour/path}">
+            <vbm:Route position="{local>positionString}" directionIndicator="true"
+                lineDash="{ path: 'local>travelMode', formatter: '.onFormatRouteLineDash'}"
+                tooltip="Länge: {local>durationSeconds}s - Distanz: {local>distanceMeters}" 
+                end="1" start="1" color="rgba(92,186,230,1.0)" 
+                colorBorder="rgb(255,255,255)" hotDeltaColor="RHLSA(0,1,1,0.6)"/>
+        </vbm:Routes>
+
+        <vbm:Spots id ="idAllPointsOfInterestsSpotsAdmin" items="{/AllPointsOfInterest}">
+            <vbm:Spot position="{longitude};{latitude}" labelType="Default" labelText="{name}" tooltip="{name}" labelPos="5" 
+                        type="{ path: 'name', formatter: '.onFormatTypeByName'}"
+                        customData:id="{ID}"  text="{ path: 'name', formatter: '.onFormatPoiName'}"
+                        click="onNumberSpotClick" contextMenu="onSpotContextMenu"/>
+        </vbm:Spots>
+    </vbm:vos>
+</vbm:GeoMap>

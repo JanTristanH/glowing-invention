@@ -1,0 +1,86 @@
+<mvc:View
+    controllerName="hwb.frontendhwb.controller.FriendsList"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true"
+    height="100%"
+    busyIndicatorDelay="0"
+>
+    <Page title="{i18n>friends}" class="sapUiResponsiveContentPadding">
+        <headerContent>
+            <core:Fragment
+                fragmentName="hwb.frontendhwb.fragment.currentUserAvatar"
+                type="XML"
+            />
+        </headerContent>
+        <content>
+            <IconTabBar expandable="false">
+                <items>
+                    <IconTabFilter
+                        key="friends"
+                        text="{i18n>friends}"
+                    >
+                        <SearchField
+                            id="idUserSearchField"
+                            showSearchButton="false"
+                            enableSuggestions="false"
+                            liveChange=".onSearchFieldLiveChange"
+                            suggestionItems="{local>/suggestionItems}"
+                        >
+                            <SuggestionItem />
+                        </SearchField>
+                        <!-- friends of User -->
+                        <List
+                            id="idFriendsList"
+                            items="{
+                                path: '/MyFriends'
+                            }"
+                            headerText="{i18n>friendListHeader}"
+                            noDataText="{i18n>friendListNoData}"
+                            selectionChange="onFriendSelectionChange"
+                            mode="SingleSelectMaster"
+                        >
+                            <items>
+                                <core:Fragment
+                                    fragmentName="hwb.frontendhwb.fragment.FriendListItem"
+                                    type="XML"
+                                />
+                            </items>
+                        </List>
+                    </IconTabFilter>
+                    <IconTabFilter
+                        id="pendingFriendshipRequestsIconTabFilter"
+                        key="pendingFriendshipRequests"
+                        text="{i18n>pendingFriendshipRequests} (0)"
+                    >
+                        <!-- PendingFriendshipRequests of user-->
+                        <List
+                            id="idPendingFriendshipRequestsList"
+                            items="{path: '/PendingFriendshipRequests', parameters: {expand: 'fromUser,toUser'}}"
+                            noDataText="{i18n>pendingFriendshipRequestsNoData}"
+                            updateFinished="onUpdateFinished"
+                        >
+                            <items>
+                                <StandardListItem
+                                    title="{i18n>requestFrom}: {toUser/name}"
+                                    description="{i18n>clickToAccept}"
+                                    icon="{toUser/picture}"
+                                    type="DetailAndActive"
+                                    press="onAcceptPendingFriendshipRequest"
+                                    detailPress="onAcceptPendingFriendshipRequest"
+                                />
+                            </items>
+                        </List>
+                    </IconTabFilter>
+                </items>
+            </IconTabBar>
+        </content>
+        <footer>
+            <core:Fragment
+                fragmentName="hwb.frontendhwb.fragment.Toolbar"
+                type="XML"
+            />
+        </footer>
+    </Page>
+</mvc:View>

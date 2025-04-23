@@ -1,0 +1,91 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.ui.layout.form">
+    <Dialog title="{i18n>EnterHikingRouteParameters}" class="sapUiResponsiveContentPadding">
+        <f:Form editable="true">
+            <f:layout>
+                <f:ResponsiveGridLayout
+                    labelSpanXL="3"
+                    labelSpanL="3"
+                    labelSpanM="3"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="4"
+                    emptySpanL="4"
+                    emptySpanM="4"
+                    emptySpanS="0"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false" />
+            </f:layout>
+            <f:formContainers>
+                <f:FormContainer>
+                    <f:formElements>
+                        <f:FormElement label="{i18n>AllowDriveInRoute}">
+                            <f:fields>
+                                <Switch state="{/allowDriveInRoute}" />
+                            </f:fields>
+                        </f:FormElement>
+
+                        <f:FormElement label="{i18n>MaxDuration}">
+                            <f:fields>
+                                <TimePicker
+                                    value="{
+                                        'path':'/maxDuration',
+                                        'type': 'sap.ui.model.type.Time'
+                                    }"
+                                    minutesStep="15"
+                                    secondsStep = "0"
+                                    placeholder="{i18n>maxDuration}" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="{i18n>MaxDistance}">
+                            <f:fields>
+                                <Slider max="25" enableTickmarks="true" class="sapUiMediumMarginBottom" width="95%"
+                                    showAdvancedTooltip="true" value="{/maxDistance}"
+                                    showHandleTooltip="false">
+                                    <ResponsiveScale tickmarksBetweenLabels="5"/>
+                                </Slider>
+                            </f:fields>
+                        </f:FormElement>
+
+                        <f:FormElement label="{i18n>StartAddress}">
+                            <f:fields>
+                                <Input id="idAutocompleteInput"
+                                    placeholder="{i18n>StartEnteringAddress}" />
+                                </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="">
+                            <f:fields>
+                                    <Button press='onUseCurrentLocation' text="{i18n>useCurrentLocation} 📍" class="sapUiSmallMarginBottom"/>
+                                </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="{i18n>LatitudeStart}" visible="false">
+                            <f:fields>
+                                <Input value="{/latitudeStart}" enabled="false" />
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="{i18n>LongitudeStart}" visible="false">
+                            <f:fields>
+                                <Input value="{/longitudeStart}" enabled="false"/>
+                            </f:fields>
+                        </f:FormElement>
+                        <f:FormElement label="{i18n>MinimumStampCount}" visible="false">
+                            <f:fields>
+                                <Input value="{/minStampCount}" type="Number" />
+                            </f:fields>
+                        </f:FormElement>
+                    </f:formElements>
+                </f:FormContainer>
+            </f:formContainers>
+        </f:Form>
+        <beginButton>
+            <Button text="{i18n>okay}" press="onSubmitRouting" />
+        </beginButton>
+        <endButton>
+            <Button text="{i18n>cancel}" press="onCancel" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

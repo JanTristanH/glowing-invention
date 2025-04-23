@@ -1,0 +1,155 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+<meta http-equiv="Content-Security-Policy"
+      content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;">
+
+
+        <title>Harzer Wanderbuddy</title>
+        <meta name="description" content="Sage lästiger Routenplanung lebewohl. Die App für die Harzer Wandernadel mit allen Stempelstellen auf einer Karte."" />
+        <meta name="theme-color" content="#e6e7dd">
+        
+        <!-- Open Graph (OG) for social sharing -->
+        <meta property="og:title" content="Harzer Wanderbuddy" />
+        <meta property="og:description" content="Sage lästiger Routenplanung lebewohl. Die App für die Harzer Wandernadel mit allen Stempelstellen auf einer Karte."" />
+        <meta property="og:url" content="https://www.harzer-wander-buddy.de/" />
+        <meta property="og:image" content="/pbc/images/icons/BuddyWithMap.webp" />
+        <meta property="og:type" content="website" />
+    
+        <!-- PWA Essentials -->
+        <link rel="manifest" href="/pbc/manifest.json"> <!-- Web App Manifest -->
+        <link rel="icon" type="image/webp" href="/pbc/images/icons/BuddyWithMap.webp">
+        <link rel="apple-touch-icon" href="/pbc/images/icons/BuddyWithMap.webp">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-title" content="Harzer Wanderbuddy">
+
+        <script>
+            debugger
+            fetch("https://4004-jantristanh-harzerwande-t1hbe8nf4g6.ws-eu118.gitpod.io/odata/v2/api/$metadata", {
+            credentials: "include"
+            }).then(response => {
+                debugger
+            if (response.ok) {
+                console.log("✅ User is logged in.");
+            } else if (response.status === 401) {
+                console.log("🔒 User is not logged in.");
+                window.location.href = "https://4004-jantristanh-harzerwande-t1hbe8nf4g6.ws-eu118.gitpod.io/login";
+            } else {
+                console.log("⚠️ Unexpected response: ", response.status);
+            }
+            });
+
+        </script>
+        
+        <!-- Service Worker -->
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./service-worker.js')
+                .then(reg => console.log("Service Worker registered!", reg))
+                .catch(err => console.error("Service Worker registration failed:", err));
+            }
+
+            let deferredPrompt;
+            let isInstallable = false;
+
+            window.addEventListener("beforeinstallprompt", (event) => {
+                // Prevent default behavior
+                event.preventDefault();
+                deferredPrompt = event;
+
+                console.log("PWA install prompt is ready!");
+
+                // Optionally show an install button
+                document.getElementById("installBtn").style.display = "block";
+                isInstallable=true;
+            });
+
+            // Function to trigger the install prompt when the user clicks a button
+            function installPWA() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === "accepted") {
+                            console.log("User accepted the install prompt");
+                        } else {
+                            console.log("User dismissed the install prompt");
+                        }
+                        deferredPrompt = null;
+                    });
+                }
+            }
+
+        </script>
+        <style>
+            html, body, body > div, #container, #container-uiarea {
+                height: 100%;
+            }
+        </style>
+        <script
+            id="sap-ui-bootstrap"
+            src="https://openui5.hana.ondemand.com/1.120.24/resources/sap-ui-core.js"
+            data-sap-ui-theme="sap_horizon"
+            data-sap-ui-resourceroots='{
+                "hwb.frontendhwb": "./"
+            }'
+            data-sap-ui-oninit="module:sap/ui/core/ComponentSupport"
+            data-sap-ui-compatVersion="edge"
+            data-sap-ui-async="true"
+            data-sap-ui-frameOptions="trusted"
+        ></script>
+        <script loading=async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBXJVytmwgkYfEQ4lqvN9C-4xMUYJhQmXk&libraries=places"></script>
+        <script src="/dependencies/chart.js"></script>
+        <style>
+            /* Loading splash screen */
+            #busyIndicator {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: #e6e7dd;
+                z-index: 1000;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            /* Logo breathing animation */
+            @keyframes breathe {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+            }
+        </style>
+
+        <!-- Leaflet install -->
+        <link rel="stylesheet" href="/dependencies/leaflet@1.9.4/dist/leaflet.css"/>
+        <script src="/dependencies/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script src="/dependencies/bbecquet/Leaflet.PolylineDecorator/dist/leaflet.polylineDecorator.js"></script>
+
+    </head>
+    <body class="sapUiBody sapUiSizeCompact" id="content" style="background-color: #e6e7dd;">
+        <!-- Loading splash screen -->
+        <div id="busyIndicator" style="text-align: center; font-family: Sans, Arial;">
+            <!-- static header text -->
+            <h3 style="color: #3d3c38;">Harzer Wanderbuddy</h3>
+            <!-- logo with breathing animation-->
+            <img src="images/BuddyWithMapNoBG.png" class="logo" alt="Harzer Wanderbuddy Logo" style="width: 100px; height: 100px; margin-top: 20px; margin-bottom: 20px; animation: breathe 2s infinite;">
+        </div>
+
+        <div
+            data-sap-ui-component
+            data-name="hwb.frontendhwb"
+            data-id="container"
+            data-settings='{"id" : "hwb.frontendhwb"}'
+            data-handle-validation="true"
+        />
+
+    </body>
+    </html>

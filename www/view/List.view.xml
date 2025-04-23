@@ -1,0 +1,173 @@
+<mvc:View
+    controllerName="hwb.frontendhwb.controller.List"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <App id="app">
+        <Page title="{i18n>visitedStampms}: {app>/selectedCount}">
+            <headerContent>
+                <core:Fragment
+                    fragmentName="hwb.frontendhwb.fragment.currentUserAvatar"
+                    type="XML"
+                />
+            </headerContent>
+            <content>
+                <HBox class="sapUiSmallMargin">
+                        <Table
+                            id="StampingsTable"
+                            inset="false"
+                            growing="true"
+                            growingThreshold="250"
+                            mode="MultiSelect"
+                            selectionChange="onSelectionChange"
+                            items="{
+                                path: '/Stampboxes',
+                                sorter: {
+                                    path: 'orderBy'
+                                },
+                                parameters:{expand : 'Stampings'}
+                            }"
+                            updateFinished=".onStampingsUpdateFinished"
+                        >
+                            <headerToolbar>
+                                <OverflowToolbar>
+                                    <ToolbarSpacer />
+                                    <Select
+                                        selectedKey="{app>/selectedFilterKey}"
+                                    >
+                                        <core:Item key="all"       text="{i18n>showAll}" />
+                                        <core:Item key="stamped"   text="{i18n>visitedStamps} ({app>/selectedCount})" />
+                                        <core:Item key="unstamped" text="{i18n>missingStamps} ({= 222 - ${app>/selectedCount} })" />
+                                        <layoutData>
+                                            <OverflowToolbarLayoutData
+                                                priority="NeverOverflow"/>
+                                        </layoutData>
+                                    </Select>
+                                    <Button
+                                        icon="sap-icon://badge"
+                                        press="onShowBagdesButtonPress"
+                                        text="{i18n>myBadges}"
+                                    />
+                                </OverflowToolbar>
+                            </headerToolbar>
+                            <columns>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                    popinDisplay="Inline"
+                                    width="5rem"
+                                >
+                                    <Text text="{i18n>number}" />
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                    popinDisplay="Inline"
+                                    width="5rem"
+                                    visible="{ parts: [{value:'0'}, 'app>/aSelectedGroupIds'], 
+                                                formatter: '.onFormatColumnVisibility' }"
+                                >
+                                    <Text text="{app>/userName0}" />
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                    popinDisplay="Inline"
+                                    width="5rem"
+                                    visible="{ parts: [{value:'1'}, 'app>/aSelectedGroupIds'], 
+                                                formatter: '.onFormatColumnVisibility' }"
+                                >
+                                    <Text text="{app>/userName1}" />
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                    popinDisplay="Inline"
+                                    width="5rem"
+                                    visible="{ parts: [{value:'2'}, 'app>/aSelectedGroupIds'], 
+                                                formatter: '.onFormatColumnVisibility' }"
+                                >
+                                    <Text text="{app>/userName2}" />
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                    popinDisplay="Inline"
+                                    width="5rem"
+                                    visible="{ parts: [{value:'3'}, 'app>/aSelectedGroupIds'], 
+                                                formatter: '.onFormatColumnVisibility' }"
+                                >
+                                    <Text text="{app>/userName3}" />
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                    popinDisplay="Inline"
+                                    width="5rem"
+                                    visible="{ parts: [{value:'4'}, 'app>/aSelectedGroupIds'], 
+                                                formatter: '.onFormatColumnVisibility' }"
+                                >
+                                    <Text text="{app>/userName4}" />
+                                </Column>
+                                <Column
+                                    minScreenWidth="Tablet"
+                                    demandPopin="true"
+                                    popinDisplay="WithoutHeader"
+                                    width="auto"
+                                    importance="High"
+                                >
+                                    <Text text="{i18n>stampPoint}" />
+                                </Column>
+                            </columns>
+                            <items>
+                                <ColumnListItem 
+                                    type="Active"
+                                    press="onListItemPress"
+                                    visible="{ parts: ['app>/selectedFilterKey', 'hasVisited'], 
+                                                formatter: '.onFormatListItemVisible'}"
+                                >
+                                    <cells>
+                                        <Text text="{number}" />
+                                        <CheckBox
+                                            enabled="false"
+                                            selected="{ parts: [{value:'0'}, 'app>/aSelectedGroupIds', 'stampedUserIds'], 
+                                                        formatter: '.onFormatGroupSelected' }"
+                                        />
+                                        <CheckBox
+                                            enabled="false"
+                                            selected="{ parts: [{value:'1'}, 'app>/aSelectedGroupIds','stampedUserIds'], 
+                                                        formatter: '.onFormatGroupSelected' }"
+                                        />
+                                        <CheckBox
+                                            enabled="false"
+                                            selected="{ parts: [{value:'2'}, 'app>/aSelectedGroupIds', 'stampedUserIds'], 
+                                                        formatter: '.onFormatGroupSelected' }"
+                                        />
+                                        <CheckBox
+                                            enabled="false"
+                                            selected="{ parts: [{value:'3'}, 'app>/aSelectedGroupIds', 'stampedUserIds'], 
+                                                        formatter: '.onFormatGroupSelected' }"
+                                        />
+                                        <CheckBox
+                                            enabled="false"
+                                            selected="{ parts: [{value:'4'}, 'app>/aSelectedGroupIds', 'stampedUserIds'], 
+                                                        formatter: '.onFormatGroupSelected' }"
+                                        />
+                                        <ObjectIdentifier title="{name}" />
+                                    </cells>
+                                </ColumnListItem>
+                            </items>
+                        </Table>
+                </HBox>
+            </content>
+            <footer>
+                <core:Fragment
+                    fragmentName="hwb.frontendhwb.fragment.Toolbar"
+                    type="XML"
+                />
+            </footer>
+        </Page>
+    </App>
+</mvc:View>

@@ -1,0 +1,2 @@
+sap.ui.define(["hwb/frontendhwb/controller/BaseController"],function(e){"use strict";return e.extend("hwb.frontendhwb.controller.Map",{onAfterRendering:function(){this.getView().byId("navButtonMapId").setType("Emphasized")}})});
+//# sourceMappingURL=Map.controller.js.map

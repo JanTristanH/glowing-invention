@@ -1,0 +1,1 @@
+{"version":3,"file":"Main.controller.js","names":["sap","ui","define","Controller","extend","onInit","onAfterRendering","this","getView","getModel","setSizeLimit"],"sources":["Main-dbg.controller.js"],"mappings":"AAAAA,IAAIC,GAAGC,OAAO,CACN,8BAKJ,SAAUC,GACN,aAEA,OAAOA,EAAWC,OAAO,kCAAmC,CACxDC,OAAQ,WAAa,EACrBC,iBAAkB,WACdC,KAAKC,UAAUC,WAAWC,aAAa,IAC3C,GAER","ignoreList":[]}

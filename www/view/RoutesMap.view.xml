@@ -1,0 +1,421 @@
+<mvc:View
+    controllerName="hwb.frontendhwb.controller.RoutesMap"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:dnd="sap.ui.core.dnd"
+    xmlns:chart="sap.suite.ui.microchart"
+    xmlns:f="sap.f"
+    xmlns:custom="hwb.frontendhwb.control"
+    displayBlock="true"
+    busyIndicatorDelay="0"
+>
+    <HBox justifyContent="SpaceBetween">
+        <Button
+            class="sapUiTinyMargin"
+            press='onBackToList'
+            type="Transparent"
+            text="{i18n>back}"
+            icon="sap-icon://navigation-left-arrow"
+        />
+        <HBox>
+            <Button
+                class="sapUiTinyMargin"
+                text="{i18n>share}"
+                icon="sap-icon://share-2"
+                type="Transparent"
+                press="onButtonShareTourPress"
+            />
+            <Button
+                class="sapUiTinyMargin"
+                text="{i18n>edit}"
+                icon="sap-icon://edit"
+                visible="{= !${app>/edit} &amp;&amp; ${app>/currentUser/ID} === ${local>/oSelectedTour/createdBy} || ${local>/oSelectedTour/createdBy} === undefined }"
+                press="onButtonEditPress"
+            />
+            <Button
+                class="sapUiTinyMargin"
+                text="{i18n>delete}"
+                icon="sap-icon://delete"
+                visible="{= ${app>/edit} &amp;&amp; ${app>/currentUser/ID} === ${local>/oSelectedTour/createdBy} }"
+                type="Transparent"
+                press="onButtonDeletePress"
+            />
+            <Button
+                class="sapUiTinyMargin"
+                text="{i18n>done}"
+                icon="sap-icon://save"
+                visible="{= ${app>/edit} &amp;&amp; ${app>/currentUser/ID} === ${local>/oSelectedTour/createdBy} }"
+                press="onButtonSavePress"
+            />
+        </HBox>
+    </HBox>
+    <Panel
+        expandable="true"
+        expanded="true"
+        width="auto"
+        visible="{app>/edit}"
+        headerText="{i18n>wayPoints}"
+        class="sapUiTinyMargin"
+    >
+        <Input
+            value="{local>/oSelectedTour/name}"
+            change="onNameInputChange"
+        />
+        <ScrollContainer 
+            height="250px"
+            vertical="true"
+        >
+            <Table
+                id="idEditRouteTable"
+                noDataText="{i18n>noWayPointsPleaseAdd}"
+                mode="SingleSelectMaster"
+                items="{
+                path: 'local>/oSelectedTour/path',
+                sorter: {
+                    path: 'rank',
+                    descending: true
+                }
+            }"
+            >
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button
+                            icon="sap-icon://add"
+                            type="Transparent"
+                            press="onAddWayPointButtonPress"
+                        />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column visible="false" />
+                    <Column visible="false" />
+                    <Column visible="false" />
+                    <Column width="70%" />
+                    <Column />
+                    <Column />
+                    <Column />
+                </columns>
+                <dragDropConfig>
+                    <dnd:DragInfo
+                        groupName="selected2available"
+                        sourceAggregation="items"
+                    />
+                    <dnd:DropInfo
+                        groupName="available2selected"
+                        targetAggregation="items"
+                        dropPosition="Between"
+                        drop="onDropSelectedProductsTable"
+                    />
+                    <dnd:DragDropInfo
+                        sourceAggregation="items"
+                        targetAggregation="items"
+                        dropPosition="Between"
+                        drop="onDropSelectedProductsTable"
+                    />
+                </dragDropConfig>
+                <items>
+                    <ColumnListItem>
+                        <cells>
+                            <Text
+                                text="{local>rank}"
+                                visible="true"
+                            />
+                            <!-- used for easy access in controller -->
+                            <Text
+                                text="{local>ID}"
+                                visible="false"
+                            />
+                            <!-- used for easy access in controller -->
+                            <Text
+                                text="{local>toPoi}"
+                                visible="false"
+                            />
+                            <Input
+                                class="sapUiTinyMarginTopBottom"
+                                placeholder="{i18n>enterStampOrParking}"
+                                showSuggestion="true"
+                                suggestionItemSelected="onSuggestionItemSelected"
+                                suggestionItems="{
+                                    path: '/AllPointsOfInterest',
+                                    sorter: { path: 'orderBy', descending: false }
+                                }"
+                                value="{local>name}"
+                            >
+                                <suggestionItems>
+                                    <core:Item text="{name}">
+                                        <core:customData>
+                                            <core:CustomData
+                                                key="ID"
+                                                value="{ID}"
+                                            />
+                                        </core:customData>
+                                    </core:Item>
+                                </suggestionItems>
+                            </Input>
+                            <Button
+                                icon="sap-icon://up"
+                                type="Transparent"
+                                press="onUpButtonPress"
+                            />
+                            <Button
+                                icon="sap-icon://down"
+                                type="Transparent"
+                                press="onDownButtonPress"
+                            />
+                            <Button
+                                icon="sap-icon://delete"
+                                type="Transparent"
+                                press="onDeleteWayPointButtonPress"
+                            />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </ScrollContainer>
+    </Panel>
+        <mvc:XMLView
+            id="RoutesMapId"
+            async="true"
+            viewName="hwb.frontendhwb.view.RoutesMapInner"
+        />
+
+            <VBox
+                id="bottomSheetTour"
+                class="bottom-sheet"
+                width="50vw"
+            >
+                <HBox class="sheet-header">
+                    <VBox class="drag-handle" />
+                </HBox>
+                <VBox
+                    class="sheet-content"
+                    height="85vh"
+                >
+
+            <FlexBox
+                justifyContent="SpaceAround"
+                alignItems="Center"
+                class="sapUiSmallMarginTop sapUiSmallMarginBottom"
+            >
+                <VBox
+                    alignContent="Center"
+                    alignItems="Center"
+                    class="sapUiMediumMarginBegin"
+                >
+                    <core:Icon src="sap-icon://fob-watch" />
+                    <Text
+                        text="{path: 'local>/oSelectedTour/duration', formatter: '.formatSecondsToTime'}"
+                    />
+                </VBox>
+                <Text text="|" />
+                <VBox
+                    alignContent="Center"
+                    alignItems="Center"
+                >
+                    <core:Icon src="sap-icon://direction-arrows" />
+                    <Text
+                        text="{path: 'local>/oSelectedTour/distance', formatter: '.formatMetersToKilometers'}"
+                    />
+                </VBox>
+                <Text text="|" />
+                <VBox
+                    alignContent="Center"
+                    alignItems="Center"
+                >
+                    <core:Icon src="sap-icon://toaster-top" />
+                    <Text text="{local>/oSelectedTour/AverageGroupStampings} / {local>/oSelectedTour/stampCount}" />
+                </VBox>
+                <Text text="|" />
+                <VBox
+                    alignContent="Center"
+                    alignItems="Center"
+                    class="sapUiMediumMarginEnd"
+                >
+                    <core:Icon src="sap-icon://trend-up" />
+                    <Text text="{path: 'local>/oSelectedTour/totalElevationGain', formatter: '.formatCleanMeter'}" />
+                </VBox>
+            </FlexBox>
+            <Panel
+                expandable="false"
+                expanded="true"
+                width="auto"
+                headerText="{i18n>wayPoints}"
+                class="sapUiTinyMargin"
+            >
+                <ScrollContainer
+                    width="100%"
+                    height="60vh"
+                    vertical="true"
+                    horizontal="false"
+                >
+                    <List
+                        id="idRoutesWayPointList"
+                        growingScrollToLoad="true"
+                        items="{local>/oSelectedTour/path}"
+                        selectionChange="onWaypointListSelectionChange"
+                        mode="SingleSelectMaster"
+                    >
+                        <CustomListItem>
+                            <HBox class="sapUiTinyMargin">
+                                <FlexBox
+                                    alignItems="Center"
+                                    justifyContent="Center"
+                                >
+                                    <core:Icon
+                                        src="{path: 'local>travelMode', formatter: '.onFormatTravelModeIcon'}"
+                                        color="#758ca4"
+                                        class="sapUiSmallMarginEnd size1"
+                                    />
+                                </FlexBox>
+                                <!-- <FlexBox
+                                    alignItems="Start"
+                                    justifyContent="SpaceBetween"
+                                    width="100%"
+                                > -->
+                                    <VBox
+                                        class="sapUiSmallMarginEnd"
+                                        justifyContent="Center"
+                                        width="100%"
+                                    >
+                                    <HBox
+                                        alignItems="Center"
+                                        justifyContent="SpaceBetween"
+                                        width="100%"
+                                    >
+                                        <Text
+                                            text="{local>name}"
+                                            class="sapUiTinyMarginTopBottom sapMTextBold"
+                                        />
+                                        <FlexBox
+                                        alignItems="Center"
+                                        justifyContent="Center"
+                                        height="100%"
+                                        >
+                                            <f:AvatarGroup
+                                                id="avatarGroupTravelTime"
+                                                groupType="Individual"
+                                                avatarDisplaySize="XS"
+                                                items="{local>stampedUsers}"
+                                                press="onAvatarGroupPress"
+                                            > 
+                                                <f:AvatarGroupItem
+                                                    initials="{parts: ['local>name'], formatter: '.onFormatInitialsByName'}"
+                                                    fallbackIcon="sap-icon://person-placeholder"
+                                                    src="{local>picture}"
+                                                    tooltip="{local>name}"
+                                                    fieldGroupIds="{local>ID}"
+                                                />
+                                            </f:AvatarGroup>
+                                        </FlexBox>
+                                    </HBox>
+                                    <HBox>
+                                    </HBox>
+                                        <Label
+                                            text="{parts: [{path: 'local>duration'}, {path: 'local>distance'}], formatter: '.formatDescription'}"
+                                            visible="{= !!${local>duration} }"
+                                        />
+                                        <Label
+                                            text="{parts: [{path: 'local>elevationGain'}, {path: 'local>elevationLoss'}], formatter: '.formatElevationDescription'}"
+                                            visible="{= !!${local>duration} &amp;&amp; !!${local>maxElevation} }"
+                                        />
+                                        <custom:ChartElevation
+                                            elevationProfile="{local>elevationProfile}"
+                                            minElevation="{local>minElevation}"
+                                            visible="{= ${local>travelMode} === 'walk' 
+                                                &amp;&amp; !!${local>maxElevation} }"/>
+                                    </VBox>
+                                    <FlexBox
+                                        alignItems="Center"
+                                        justifyContent="Center"
+                                        direction="Column"
+                                        wrap="Wrap"
+                                        width="20%"
+                                        class="sapUiTinyMarginEnd"
+                                    >
+                                        <Button
+                                            icon="{path: 'local>toPoi', formatter: '.formatStampButtonIcon'}"
+                                            visible="{path: 'local>toPoi', formatter: '.formatStampButtonVisible'}"
+                                            enabled="{path: 'local>toPoi', formatter: '.formatStampButtonEnabled'}"
+                                            text="{i18n>stamp}"
+                                            tooltip="{i18n>stamp}"
+                                            type="Transparent"
+                                            press="onButtonStampPress"
+                                            class="sapUiTinyMarginEnd"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="ID"
+                                                    value="{local>toPoi}"
+                                                    writeToDom="true"
+                                                />
+                                            </customData>
+                                        </Button>
+
+                                        <Button 
+                                            text="{i18n>group}"
+                                            tooltip="{i18n>group}"
+                                            visible="{path: 'local>toPoi', formatter: '.formatStampButtonVisible'}"
+                                            icon="sap-icon://checklist"
+                                            press=".onStampGroupPress"
+                                            type="Transparent"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="ID"
+                                                    value="{local>toPoi}"
+                                                    writeToDom="true"
+                                                />
+                                            </customData>
+                                        </Button>
+
+                                        <MenuButton
+                                            icon="sap-icon://forward"
+                                            type="Emphasized"
+                                            buttonMode="Split" 
+                                            defaultAction="onNavigateWithGoogleMaps"
+                                            class="sapUiTinyMarginEnd"
+                                        >
+                                            <customData>
+                                                <core:CustomData
+                                                    key="ID"
+                                                    value="{local>toPoi}"
+                                                    writeToDom="true"
+                                                />
+                                            </customData>
+                                            <menu>
+                                                <Menu itemSelected="onMenuAction">
+                                                    <MenuItem text="{i18n>navigate}" icon="sap-icon://forward" press="onNavigateWithGoogleMaps">
+                                                        <customData>
+                                                            <core:CustomData
+                                                                key="ID"
+                                                                value="{local>toPoi}"
+                                                                writeToDom="true"
+                                                            />
+                                                        </customData>
+                                                    </MenuItem>
+                                                    <MenuItem text="{i18n>navigateOtherApp}" icon="sap-icon://map-2" press="onNavigateWithNative">
+                                                       <customData>
+                                                            <core:CustomData
+                                                                key="ID"
+                                                                value="{local>toPoi}"
+                                                                writeToDom="true"
+                                                            />
+                                                        </customData>
+                                                    </MenuItem>
+                                                </Menu>
+                                            </menu>
+                                        </MenuButton>
+                                    </FlexBox>
+                                <!-- </FlexBox> -->
+                            </HBox>
+                        </CustomListItem>
+                    </List>
+                </ScrollContainer>
+            </Panel>
+
+        </VBox>
+    </VBox>
+</mvc:View>

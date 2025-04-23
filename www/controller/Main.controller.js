@@ -1,0 +1,2 @@
+sap.ui.define(["sap/ui/core/mvc/Controller"],function(e){"use strict";return e.extend("hwb.frontendhwb.controller.Main",{onInit:function(){},onAfterRendering:function(){this.getView().getModel().setSizeLimit(500)}})});
+//# sourceMappingURL=Main.controller.js.map

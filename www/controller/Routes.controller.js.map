@@ -1,0 +1,1 @@
+{"version":3,"file":"Routes.controller.js","names":["sap","ui","define","Controller","extend","onAfterRendering","this","getView","byId","setType"],"sources":["Routes-dbg.controller.js"],"mappings":"AAAAA,IAAIC,GAAGC,OAAO,CACV,6CAKA,SAAUC,GACN,aAEA,OAAOA,EAAWC,OAAO,oCAAqC,CAC1DC,iBAAkB,WACdC,KAAKC,UAAUC,KAAK,qBAAqBC,QAAQ,aACrD,GAER","ignoreList":[]}

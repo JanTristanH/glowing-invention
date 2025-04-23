@@ -1,0 +1,235 @@
+{
+    "_version": "1.40.0",
+    "sap.app": {
+        "id": "hwb.frontendhwb",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.7.3",
+            "toolsId": "88af2847-d744-4a52-bcea-9c8ab546dfc6"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "https://4004-jantristanh-harzerwande-t1hbe8nf4g6.ws-eu118.gitpod.io/odata/v2/api/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            },
+            "mapConfig": {
+                "type": "JSON",
+                "uri": "./map/config.json"
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": false,
+        "handleValidation": true,
+        "dependencies": {
+            "minUI5Version": "1.102.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.ui.table": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "hwb.frontendhwb.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultBindingMode": "TwoWay",
+					"useBatch": true
+                }
+            },
+            "mapConfig": {
+                "dataSource": "mapConfig"
+            },
+            "app" : {
+                "type": "sap.ui.model.json.JSONModel"
+            }
+        },
+        "resources": {
+            "css": [{
+                "uri": "css/style.css"
+            }]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "hwb.frontendhwb.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [{
+                "name": "Main",
+                "pattern": "main",
+                "target": [
+                    "TargetList"
+                ]
+            },{
+                "name": "Map",
+                "pattern": ":?query:",
+                "target": [
+                    "TargetMap"
+                ]
+            },
+            {
+                "name": "MapWithPOI",
+                "pattern": "poi/{idPOI}",
+                "target": [
+                    "TargetMap"
+                ]
+            },
+            {
+                "name": "Routes",
+                "pattern": "routes",
+                "target": [
+                    "TargetRoutes"
+                ]
+            },
+            {
+                "name": "RoutesDetailTransient",
+                "pattern": "tour/transient/{idListTravelTimes}",
+                "target": [
+                    "TargetRoutes"
+                ]
+            },
+            {
+                "name": "RoutesDetail",
+                "pattern": "tour/{TourId}",
+                "target": [
+                    "TargetRoutes"
+                ]
+            },
+            {
+                "name": "RoutesDetailEdit",
+                "pattern": "tour/{TourId}/edit",
+                "target": [
+                    "TargetRoutes"
+                ]
+            },
+            {
+                "name": "FriendsList",
+                "pattern": "friends",
+                "target": [
+                    "TargetFriendsList"
+                ]
+            },
+            {
+                "name": "Profile",
+                "pattern": "profile/{userId}",
+                "target": [
+                    "TargetProfile"
+                ]
+            },
+            {
+                "name": "Admin",
+                "pattern": "admin",
+                "target": [
+                    "TargetAdmin"
+                ]
+            }],
+            "targets": {
+                "TargetMain": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Main",
+                    "viewName": "Main"
+                },
+                "TargetList": {
+                    "viewName": "List",
+                    "viewType": "XML",
+                    "transition": "show",
+                    "clearControlAggregation": false,
+                    "viewId": "List"
+                },
+                "TargetMap": {
+                    "viewName": "Map",
+                    "viewType": "XML",
+                    "transition": "show",
+                    "clearControlAggregation": false,
+                    "viewId": "Map"
+                },
+                "TargetRoutes": {
+                    "viewName": "Routes",
+                    "viewType": "XML",
+                    "transition": "show",
+                    "clearControlAggregation": false,
+                    "viewId": "Routes"
+                },
+                "TargetFriendsList": {
+                    "viewName": "FriendsList",
+                    "viewType": "XML",
+                    "transition": "show",
+                    "clearControlAggregation": false,
+                    "viewId": "FriendsList"
+                },
+                "TargetProfile": {
+                    "viewName": "Profile",
+                    "viewType": "XML",
+                    "transition": "show",
+                    "clearControlAggregation": false,
+                    "viewId": "Profile"
+                },
+                "TargetAdmin": {
+                    "viewName": "Admin",
+                    "viewType": "XML",
+                    "transition": "show",
+                    "clearControlAggregation": false,
+                    "viewId": "Admin"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "hwb.frontendhwb.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    },
+    "sap.cloud": {
+        "public": true,
+        "service": "hwb-frontendhwb"
+    }
+}

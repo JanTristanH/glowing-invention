@@ -17,7 +17,7 @@
         },
         "dataSources": {
             "mainService": {
-                "uri": "https://4004-jantristanh-harzerwande-t1hbe8nf4g6.ws-eu118.gitpod.io/odata/v2/api/",
+                "uri": "https://app.harzer-wander-buddy.de/odata/v2/api/",
                 "type": "OData",
                 "settings": {
                     "annotations": [],
